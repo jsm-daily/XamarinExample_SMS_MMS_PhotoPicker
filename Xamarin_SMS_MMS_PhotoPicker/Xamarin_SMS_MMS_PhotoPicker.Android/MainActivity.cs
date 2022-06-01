@@ -10,6 +10,36 @@ namespace Xamarin_SMS_MMS_PhotoPicker.Droid
     [Activity(Label = "Xamarin_SMS_MMS_PhotoPicker", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        //Guide - 5 : 사진 선택 / 권한 부여
+        #region 사진 보관함 / 권한 부여
+        internal static MainActivity Instance { get; private set; }
+
+        public static readonly int PickImageId = 1000;
+        public System.Threading.Tasks.TaskCompletionSource<System.IO.Stream> PickImageTaskCompletionSource { set; get; }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent intent)
+        {
+            base.OnActivityResult(requestCode, resultCode, intent);
+
+            if (requestCode == PickImageId)
+            {
+                if ((resultCode == Result.Ok) && (intent != null))
+                {
+                    Android.Net.Uri uri = intent.Data;
+                    System.IO.Stream stream = ContentResolver.OpenInputStream(uri);
+
+                    //// Set the Stream as the completion of the Task
+                    PickImageTaskCompletionSource.SetResult(stream);
+                }
+                else
+                {
+                    PickImageTaskCompletionSource.SetResult(null);
+                }
+            }
+        }
+
+
+
         /// <summary>
         /// 앱 사용 권한 확인 및 부여
         /// </summary>
@@ -163,33 +193,6 @@ namespace Xamarin_SMS_MMS_PhotoPicker.Droid
             return allPermsGranted;
 
         }
-        //Guide - 5 : 사진 선택
-        #region 사진 보관함
-        internal static MainActivity Instance { get; private set; }
-
-        public static readonly int PickImageId = 1000;
-        public System.Threading.Tasks.TaskCompletionSource<System.IO.Stream> PickImageTaskCompletionSource { set; get; }
-
-        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent intent)
-        {
-            base.OnActivityResult(requestCode, resultCode, intent);
-
-            if (requestCode == PickImageId)
-            {
-                if ((resultCode == Result.Ok) && (intent != null))
-                {
-                    Android.Net.Uri uri = intent.Data;
-                    System.IO.Stream stream = ContentResolver.OpenInputStream(uri);
-
-                    //// Set the Stream as the completion of the Task
-                    PickImageTaskCompletionSource.SetResult(stream);
-                }
-                else
-                {
-                    PickImageTaskCompletionSource.SetResult(null);
-                }
-            }
-        }
         #endregion
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -199,12 +202,12 @@ namespace Xamarin_SMS_MMS_PhotoPicker.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            //Guide - 6 : 초기화
+            //Guide - 6 : 초기화 / 권한 확인
             #region 사진 보관함
             Instance = this;
-            #endregion
             
             CheckAppPermissions();
+            #endregion
 
             LoadApplication(new App());
         }
