@@ -6,7 +6,7 @@ using System.Text;
 using Xamarin_SMS_MMS_PhotoPicker.Droid.Redefinitions;
 using Xamarin_SMS_MMS_PhotoPicker.Interfaces;
 
-#region SAMPLE - 8 : MMS 및 SMS 구현
+#region Guide - 8 : MMS 및 SMS 구현
 [assembly: Xamarin.Forms.Dependency(typeof(SMS))]
 namespace Xamarin_SMS_MMS_PhotoPicker.Droid.Redefinitions
 {

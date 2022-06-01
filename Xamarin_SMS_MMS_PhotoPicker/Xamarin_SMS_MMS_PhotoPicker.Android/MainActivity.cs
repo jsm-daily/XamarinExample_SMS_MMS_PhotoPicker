@@ -163,7 +163,7 @@ namespace Xamarin_SMS_MMS_PhotoPicker.Droid
             return allPermsGranted;
 
         }
-        //SAMPLE - 5 : 사진 선택
+        //Guide - 5 : 사진 선택
         #region 사진 보관함
         internal static MainActivity Instance { get; private set; }
 
@@ -199,7 +199,7 @@ namespace Xamarin_SMS_MMS_PhotoPicker.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            //SAMPLE - 6 : 초기화
+            //Guide - 6 : 초기화
             #region 사진 보관함
             Instance = this;
             #endregion

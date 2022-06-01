@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Xamarin_SMS_MMS_PhotoPicker.Interfaces
 {
-    #region SAMPLE - 1 : Interface 선언
+    #region Guide - 1 : Interface 선언
     public interface ISMS
     {
         /// <summary>

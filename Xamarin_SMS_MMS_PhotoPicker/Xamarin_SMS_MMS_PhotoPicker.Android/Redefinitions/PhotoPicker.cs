@@ -2,7 +2,7 @@
 using Xamarin_SMS_MMS_PhotoPicker.Droid;
 using Xamarin_SMS_MMS_PhotoPicker.Interfaces;
 
-#region SAMPLE - 7 : 사진 선택기 구현
+#region Guide - 7 : 사진 선택기 구현
 [assembly: Xamarin.Forms.Dependency(typeof(PhotoPicker))]
 namespace Xamarin_SMS_MMS_PhotoPicker.Droid
 {
