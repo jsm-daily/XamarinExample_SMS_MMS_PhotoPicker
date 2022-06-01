@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xamarin_SMS_MMS_PhotoPicker.MainPage">
+
+    <StackLayout>
+        <Entry x:Name="ent_recipients" Placeholder="수신번호를 입력하세요." Keyboard="Numeric" Text="01054459178"/>
+        <Entry x:Name="ent_msg" Placeholder="메시지를 입력하세요." Keyboard="Text" Text="테스트 메시지 입니다.ABCD 가나다라" />
+        <Button x:Name="btn_SMS" Text="SMS 발송" Clicked="btn_SMS_Clicked"/>
+        <Button x:Name="btn_MMS" Text="MMS 발송" Clicked="btn_MMS_Clicked"/>
+    </StackLayout>
+
+</ContentPage>
